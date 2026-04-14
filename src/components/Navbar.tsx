@@ -127,7 +127,7 @@ export default function Navbar() {
               onClick={(e) => handleLinkClick(e, "#contact")}
               className="text-sm text-gray-400 hover:text-white transition-colors font-medium"
             >
-              +62 812-3456-7890
+              +212 712-505-058
             </a>
             <a
               href="#fleet"

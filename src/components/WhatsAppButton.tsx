@@ -61,7 +61,7 @@ export default function WhatsAppButton() {
               ].map((msg) => (
                 <a
                   key={msg}
-                  href={`https://wa.me/6281234567890?text=${encodeURIComponent(msg.replace(/^.{2} /, "Hi Engenz! "))}`}
+                  href={`https://wa.me/212712505058?text=${encodeURIComponent(msg.replace(/^.{2} /, "Hi Engenz! "))}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between px-3 py-2 rounded-lg text-sm text-gray-300 hover:text-white group transition-all"
@@ -75,7 +75,7 @@ export default function WhatsAppButton() {
 
             {/* CTA */}
             <a
-              href="https://wa.me/6281234567890"
+              href="https://wa.me/212712505058"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold text-white transition-all hover:-translate-y-0.5"
@@ -91,7 +91,7 @@ export default function WhatsAppButton() {
       {/* Phone quick link (shows when popup is closed) */}
       {!isOpen && (
         <a
-          href="tel:+6281234567890"
+          href="tel:+212712505058"
           className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-white transition-all hover:-translate-y-0.5"
           style={{
             background: "rgba(37,99,235,0.9)",

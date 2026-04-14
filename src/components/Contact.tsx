@@ -7,31 +7,31 @@ const contactInfo = [
   {
     icon: Phone,
     label: "Phone",
-    value: "+62 812-3456-7890",
+    value: "+212 712-505-058",
     sub: "Mon–Sun, 08:00–21:00",
-    href: "tel:+6281234567890",
+    href: "tel:+212712505058",
     color: "blue",
   },
   {
     icon: MessageCircle,
     label: "WhatsApp",
-    value: "+62 812-3456-7890",
+    value: "+212 712-505-058",
     sub: "Quick replies, 24/7",
-    href: "https://wa.me/6281234567890",
+    href: "https://wa.me/212712505058",
     color: "green",
   },
   {
     icon: Mail,
     label: "Email",
-    value: "hello@engenz.id",
+    value: "lixiamodoshir@gmail.com",
     sub: "Response within 2 hours",
-    href: "mailto:hello@engenz.id",
+    href: "mailto:lixiamodoshir@gmail.com",
     color: "purple",
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "Jl. Sudirman No. 12, Jakarta",
+    value: "123 Rue Mohammed V, Casablanca",
     sub: "Open daily 08:00–20:00",
     href: "#",
     color: "amber",
@@ -139,7 +139,7 @@ export default function Contact() {
 
             {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/6281234567890?text=Hi%20Engenz!%20I%27d%20like%20to%20rent%20a%20vehicle."
+              href="https://wa.me/212712505058?text=Hi%20Engenz!%20I%27d%20like%20to%20rent%20a%20vehicle."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-3 w-full py-4 rounded-2xl font-bold text-sm transition-all hover:shadow-xl hover:shadow-green-600/20 hover:-translate-y-0.5"

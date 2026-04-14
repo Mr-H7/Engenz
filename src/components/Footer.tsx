@@ -27,7 +27,7 @@ const footerLinks = {
     { label: "FAQ", href: "#faq" },
     { label: "Contact Us", href: "#contact" },
     { label: "Book Now", href: "#contact" },
-    { label: "WhatsApp", href: "https://wa.me/6281234567890" },
+    { label: "WhatsApp", href: "https://wa.me/212712505058" },
   ],
 };
 
@@ -84,7 +84,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-wrap gap-3">
               <a
-                href="https://wa.me/6281234567890?text=Hi%20Engenz!%20I%27d%20like%20to%20book%20a%20vehicle."
+                href="https://wa.me/212712505058?text=Hi%20Engenz!%20I%27d%20like%20to%20book%20a%20vehicle."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded-xl text-sm transition-all hover:shadow-lg hover:shadow-green-600/25"
@@ -125,22 +125,22 @@ export default function Footer() {
             {/* Contact quick info */}
             <div className="space-y-2.5">
               <a
-                href="tel:+6281234567890"
+                href="tel:+212712505058"
                 className="flex items-center gap-2 text-gray-500 hover:text-gray-300 transition-colors text-sm"
               >
                 <Phone size={13} className="text-blue-500" />
-                +62 812-3456-7890
+                +212 712-505-058
               </a>
               <a
-                href="mailto:hello@engenz.id"
+                href="mailto:lixiamodoshir@gmail.com"
                 className="flex items-center gap-2 text-gray-500 hover:text-gray-300 transition-colors text-sm"
               >
                 <Mail size={13} className="text-blue-500" />
-                hello@engenz.id
+                lixiamodoshir@gmail.com
               </a>
               <div className="flex items-start gap-2 text-gray-500 text-sm">
                 <MapPin size={13} className="text-blue-500 mt-0.5 flex-shrink-0" />
-                Jl. Sudirman No. 12, Jakarta Pusat
+                123 Rue Mohammed V, Casablanca
               </div>
             </div>
 

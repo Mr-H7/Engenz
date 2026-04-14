@@ -6,11 +6,11 @@ import { ChevronDown, HelpCircle } from "lucide-react";
 const faqs = [
   {
     q: "What documents do I need to rent a vehicle?",
-    a: "You will need a valid government-issued ID (KTP or passport), a valid driver's license (SIM A for cars, SIM C for motorcycles), and a security deposit. For foreign nationals, a passport and international driving permit are required.",
+    a: "You will need a valid national ID (CIN) or passport, a valid Moroccan driver's license (Permis de Conduire — category B for cars, A for motorcycles), and a security deposit. For foreign nationals, a passport and an international or EU driving permit are accepted.",
   },
   {
     q: "How much is the security deposit?",
-    a: "The deposit varies by vehicle type: Economy cars start at Rp 500,000, Standard/SUVs at Rp 1,000,000, Luxury vehicles at Rp 2,000,000–5,000,000, and motorcycles at Rp 300,000–500,000. The full deposit is returned upon safe vehicle return.",
+    a: "The deposit varies by vehicle type: Economy cars start at 500 DH, Standard cars/SUVs at 1,000 DH, Luxury vehicles at 2,000–5,000 DH, and motorcycles at 300–500 DH. The full deposit is returned upon safe vehicle return with no damage.",
   },
   {
     q: "What is the minimum rental duration?",
@@ -133,7 +133,7 @@ export default function FAQ() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <a
-              href="https://wa.me/6281234567890"
+              href="https://wa.me/212712505058"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-5 py-2.5 bg-green-600/15 border border-green-500/25 text-green-400 hover:text-green-300 rounded-xl text-sm font-semibold transition-all hover:bg-green-600/25"
