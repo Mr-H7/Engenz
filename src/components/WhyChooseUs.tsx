@@ -10,6 +10,7 @@ import {
   Car,
   CheckCircle,
 } from "lucide-react";
+import AnimateOnScroll from "@/components/AnimateOnScroll";
 
 const reasons = [
   {
@@ -133,12 +134,12 @@ export default function WhyChooseUs() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {reasons.map(({ icon: Icon, title, description, color }) => {
+          {reasons.map(({ icon: Icon, title, description, color }, idx) => {
             const c = colorMap[color] || colorMap.blue;
             return (
+              <AnimateOnScroll key={title} delay={idx * 60} direction="up">
               <div
-                key={title}
-                className="group relative p-6 rounded-2xl transition-all duration-400 hover:-translate-y-1"
+                className="group relative p-6 rounded-2xl transition-all duration-400 hover:-translate-y-1 h-full"
                 style={{
                   background: "linear-gradient(145deg, #141414, #111)",
                   border: "1px solid rgba(255,255,255,0.06)",
@@ -160,6 +161,7 @@ export default function WhyChooseUs() {
                 <h3 className="text-white font-bold text-base mb-2">{title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
               </div>
+              </AnimateOnScroll>
             );
           })}
         </div>

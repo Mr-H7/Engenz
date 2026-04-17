@@ -23,41 +23,36 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-black"
     >
-      {/* Background layers */}
-      <div className="absolute inset-0 hero-pattern opacity-60" />
+      {/* Grid pattern */}
+      <div className="absolute inset-0 hero-pattern opacity-50" />
 
-      {/* Radial gradient spotlight */}
+      {/* Animated gradient orbs */}
       <div
-        className="absolute inset-0"
+        className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full pointer-events-none"
         style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(37,99,235,0.12) 0%, rgba(0,0,0,0) 70%)",
+          background: "radial-gradient(circle, rgba(37,99,235,0.18) 0%, transparent 70%)",
+          animation: "orbFloat1 12s ease-in-out infinite",
+        }}
+      />
+      <div
+        className="absolute -bottom-48 -right-24 w-[700px] h-[700px] rounded-full pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%)",
+          animation: "orbFloat2 16s ease-in-out infinite",
+        }}
+      />
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse, rgba(37,99,235,0.06) 0%, transparent 60%)",
         }}
       />
 
-      {/* Top-right corner glow */}
-      <div
-        className="absolute top-0 right-0 w-[600px] h-[600px] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle at 80% 10%, rgba(37,99,235,0.18) 0%, transparent 60%)",
-        }}
-      />
+      {/* Top accent line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
 
-      {/* Bottom-left glow */}
-      <div
-        className="absolute bottom-0 left-0 w-[500px] h-[400px] pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle at 20% 90%, rgba(37,99,235,0.08) 0%, transparent 60%)",
-        }}
-      />
-
-      {/* Horizontal accent line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-600/30 to-transparent" />
-
-      {/* SVG Car Silhouette - decorative */}
-      <div className="absolute right-0 bottom-0 w-full lg:w-3/5 h-full opacity-[0.04] pointer-events-none overflow-hidden">
+      {/* Decorative car silhouette */}
+      <div className="absolute right-0 bottom-0 w-full lg:w-3/5 h-full opacity-[0.035] pointer-events-none overflow-hidden select-none">
         <svg viewBox="0 0 800 400" className="w-full h-full" fill="white">
           <path d="M160,280 L120,220 L180,160 L280,140 L420,130 L540,140 L620,160 L660,220 L680,280 L650,295 L630,295 L600,260 Q580,230 540,230 Q500,230 480,260 L370,260 Q350,230 310,230 Q270,230 250,260 L190,260 L160,280 Z" />
           <rect x="200" y="205" width="130" height="60" rx="8" />
@@ -66,6 +61,20 @@ export default function Hero() {
           <circle cx="510" cy="295" r="35" />
         </svg>
       </div>
+
+      {/* Keyframes injected via style tag */}
+      <style>{`
+        @keyframes orbFloat1 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(40px, 30px) scale(1.05); }
+          66% { transform: translate(-20px, 50px) scale(0.95); }
+        }
+        @keyframes orbFloat2 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          40% { transform: translate(-50px, -30px) scale(1.08); }
+          70% { transform: translate(30px, -20px) scale(0.97); }
+        }
+      `}</style>
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16">
@@ -127,7 +136,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Bottom stats bar */}
+      {/* Stats bar */}
       <div className="relative z-10 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
           <div className="flex flex-wrap items-center justify-between gap-6">
@@ -147,7 +156,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-30">
         <span className="text-gray-400 text-xs tracking-widest uppercase">Scroll</span>
         <div className="w-px h-8 bg-gradient-to-b from-gray-400 to-transparent" />
       </div>

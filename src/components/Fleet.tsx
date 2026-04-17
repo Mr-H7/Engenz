@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Users, Fuel, Settings2, Star, ArrowRight, CheckCircle } from "lucide-react";
+import AnimateOnScroll from "@/components/AnimateOnScroll";
 
 type FilterKey = "All" | "Cars" | "SUVs" | "Luxury" | "Motorcycles" | "Sport Bikes" | "Economy";
 
@@ -155,7 +156,7 @@ export default function Fleet() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
+        <AnimateOnScroll className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-white/8 text-gray-400 text-xs font-semibold uppercase tracking-widest mb-4">
             <Star size={10} className="text-blue-400" />
             Our Fleet
@@ -168,7 +169,7 @@ export default function Fleet() {
             curated fleet of premium, well-maintained vehicles.
           </p>
           <div className="section-divider mt-6" />
-        </div>
+        </AnimateOnScroll>
 
         {/* Filter Tabs */}
         <div className="flex items-center justify-center flex-wrap gap-2 mb-10">

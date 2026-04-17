@@ -1,4 +1,5 @@
 import { CheckCircle, ArrowRight } from "lucide-react";
+import AnimateOnScroll from "@/components/AnimateOnScroll";
 
 const values = [
   "Quality-first vehicle selection",
@@ -17,7 +18,7 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Visual Side */}
-          <div className="relative order-2 lg:order-1">
+          <AnimateOnScroll className="relative order-2 lg:order-1" direction="left">
             {/* Main card */}
             <div
               className="relative rounded-3xl overflow-hidden p-8"
@@ -92,10 +93,10 @@ export default function About() {
               </div>
               <div className="text-gray-500 text-xs">Vehicle Rental Service</div>
             </div>
-          </div>
+          </AnimateOnScroll>
 
           {/* Content Side */}
-          <div className="order-1 lg:order-2">
+          <AnimateOnScroll className="order-1 lg:order-2" direction="right" delay={100}>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-white/8 text-gray-400 text-xs font-semibold uppercase tracking-widest mb-5">
               About Engenz
             </div>
@@ -149,7 +150,7 @@ export default function About() {
                 Contact Us
               </a>
             </div>
-          </div>
+          </AnimateOnScroll>
         </div>
       </div>
     </section>

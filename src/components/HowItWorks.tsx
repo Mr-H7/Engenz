@@ -1,4 +1,5 @@
 import { Search, Calendar, CheckCircle, Key, ArrowRight } from "lucide-react";
+import AnimateOnScroll from "@/components/AnimateOnScroll";
 
 const steps = [
   {
@@ -100,7 +101,8 @@ export default function HowItWorks() {
             {steps.map(({ step, icon: Icon, title, description, color }, idx) => {
               const c = colorMap[color];
               return (
-                <div key={step} className="relative group">
+                <AnimateOnScroll key={step} delay={idx * 100} direction="up">
+                <div className="relative group h-full">
                   <div
                     className="p-6 rounded-2xl h-full transition-all duration-400 hover:-translate-y-1"
                     style={{
@@ -137,6 +139,7 @@ export default function HowItWorks() {
                     </div>
                   )}
                 </div>
+                </AnimateOnScroll>
               );
             })}
           </div>

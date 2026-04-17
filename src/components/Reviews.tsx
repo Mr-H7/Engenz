@@ -1,4 +1,5 @@
 import { Star, Quote } from "lucide-react";
+import AnimateOnScroll from "@/components/AnimateOnScroll";
 
 const reviews = [
   {
@@ -88,7 +89,7 @@ export default function Reviews() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-14">
+        <AnimateOnScroll className="text-center mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-white/8 text-gray-400 text-xs font-semibold uppercase tracking-widest mb-4">
             <Star size={10} className="text-amber-400" />
             Customer Reviews
@@ -112,14 +113,14 @@ export default function Reviews() {
             <span className="text-white font-black text-xl">5.0</span>
             <span className="text-gray-500 text-sm">from 500+ reviews</span>
           </div>
-        </div>
+        </AnimateOnScroll>
 
         {/* Reviews Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {reviews.map((review) => (
+          {reviews.map((review, idx) => (
+            <AnimateOnScroll key={review.id} delay={idx * 80} direction="up">
             <div
-              key={review.id}
-              className="testimonial-card relative p-6 rounded-2xl"
+              className="testimonial-card relative p-6 rounded-2xl h-full"
               style={{
                 background: "linear-gradient(145deg, #141414, #111)",
                 border: "1px solid rgba(255,255,255,0.06)",
@@ -172,6 +173,7 @@ export default function Reviews() {
                 </div>
               </div>
             </div>
+            </AnimateOnScroll>
           ))}
         </div>
 
