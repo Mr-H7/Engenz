@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import ZNavbar from "@/components/ZNavbar";
 import ZFooter from "@/components/ZFooter";
+import VehicleImage from "@/components/VehicleImage";
 
 export async function generateStaticParams() {
   return vehicles.map((v) => ({ slug: v.slug }));
@@ -215,31 +216,20 @@ export default async function VehicleDetailPage({
               </div>
 
               {/* Right — visual */}
-              <div
-                className="relative rounded-2xl overflow-hidden flex items-center justify-center"
+              <VehicleImage
+                image={vehicle.image}
+                emoji={vehicle.emoji}
+                name={vehicle.name}
+                bgGradient={vehicle.bgGradient}
+                glowColor={vehicle.glowColor}
+                className="rounded-2xl"
                 style={{
-                  background: vehicle.bgGradient,
                   border: "1px solid rgba(255,255,255,0.07)",
                   minHeight: "360px",
                 }}
-              >
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: `radial-gradient(ellipse 80% 60% at 50% 80%, ${vehicle.glowColor} 0%, transparent 70%)`,
-                  }}
-                />
-                <span
-                  className="select-none relative z-10"
-                  style={{
-                    fontSize: "clamp(140px, 20vw, 220px)",
-                    filter: `drop-shadow(0 20px 60px ${vehicle.glowColor})`,
-                    transform: "rotate(-5deg)",
-                  }}
-                >
-                  {vehicle.emoji}
-                </span>
-              </div>
+                emojiSize="clamp(140px, 20vw, 220px)"
+                priority
+              />
             </div>
           </div>
         </section>
@@ -459,19 +449,15 @@ export default async function VehicleDetailPage({
                       border: "1px solid rgba(255,255,255,0.07)",
                     }}
                   >
-                    <div
-                      className="h-36 flex items-center justify-center"
-                      style={{
-                        background: `radial-gradient(ellipse 80% 60% at 50% 70%, ${v.glowColor} 0%, transparent 70%)`,
-                      }}
-                    >
-                      <span
-                        className="select-none text-8xl transition-transform duration-500 group-hover:scale-110"
-                        style={{ filter: `drop-shadow(0 10px 30px ${v.glowColor})` }}
-                      >
-                        {v.emoji}
-                      </span>
-                    </div>
+                    <VehicleImage
+                      image={v.image}
+                      emoji={v.emoji}
+                      name={v.name}
+                      bgGradient={v.bgGradient}
+                      glowColor={v.glowColor}
+                      className="h-36 w-full"
+                      emojiSize="80px"
+                    />
                     <div className="p-4">
                       <h3
                         className="font-display font-bold text-white mb-1"

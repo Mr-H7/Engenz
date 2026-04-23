@@ -6,6 +6,7 @@ import { vehicles, type Category, type Transmission } from "@/data/vehicles";
 import { Users, Fuel, Settings, ArrowRight, Search } from "lucide-react";
 import ZNavbar from "@/components/ZNavbar";
 import ZFooter from "@/components/ZFooter";
+import VehicleImage from "@/components/VehicleImage";
 
 type FilterKey = "All" | Category | Transmission;
 
@@ -168,31 +169,18 @@ export default function FleetPage() {
                   }}
                 >
                   {/* Car visual */}
-                  <div
-                    className="relative h-44 flex items-center justify-center overflow-hidden"
-                    style={{
-                      background: `radial-gradient(ellipse 80% 60% at 50% 70%, ${v.glowColor} 0%, transparent 70%)`,
-                    }}
-                  >
-                    <span
-                      className="select-none transition-transform duration-500 group-hover:scale-110"
-                      style={{
-                        fontSize: "clamp(72px, 12vw, 100px)",
-                        filter: `drop-shadow(0 10px 40px ${v.glowColor})`,
-                        transform: v.category === "Economy" ? "rotate(-3deg)" : "rotate(-5deg)",
-                      }}
-                    >
-                      {v.emoji}
-                    </span>
-                    {/* bottom fade */}
-                    <div
-                      className="absolute inset-x-0 bottom-0 h-16"
-                      style={{
-                        background: "linear-gradient(to top, rgba(5,8,20,0.95) 0%, transparent 100%)",
-                      }}
+                  <div className="relative h-44">
+                    <VehicleImage
+                      image={v.image}
+                      emoji={v.emoji}
+                      name={v.name}
+                      bgGradient={v.bgGradient}
+                      glowColor={v.glowColor}
+                      className="h-44 w-full"
+                      emojiSize="clamp(72px, 12vw, 100px)"
                     />
                     {/* availability badge */}
-                    <div className="absolute top-3 left-3">
+                    <div className="absolute top-3 left-3 z-10">
                       {v.available ? (
                         <span
                           className="px-2 py-0.5 rounded-sm text-xs font-bold tracking-widest"
@@ -220,7 +208,7 @@ export default function FleetPage() {
                       )}
                     </div>
                     {/* category badge */}
-                    <div className="absolute top-3 right-3">
+                    <div className="absolute top-3 right-3 z-10">
                       <span
                         className="px-2 py-0.5 rounded-sm text-xs font-bold tracking-widest"
                         style={{
