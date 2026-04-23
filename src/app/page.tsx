@@ -1,37 +1,19 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import QuickBooking from "@/components/QuickBooking";
-import Fleet from "@/components/Fleet";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import HowItWorks from "@/components/HowItWorks";
-import SpecialOffers from "@/components/SpecialOffers";
-import VehicleCategories from "@/components/VehicleCategories";
-import TrustStats from "@/components/TrustStats";
-import Reviews from "@/components/Reviews";
-import About from "@/components/About";
-import FAQ from "@/components/FAQ";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import ZNavbar from "@/components/ZNavbar";
+import ZHero from "@/components/ZHero";
+import ZCollection from "@/components/ZCollection";
+import ZStats from "@/components/ZStats";
+import ZFooter from "@/components/ZFooter";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ScrollToTop from "@/components/ScrollToTop";
 
 export default function Home() {
   return (
-    <main className="bg-black text-white overflow-x-hidden">
-      <Navbar />
-      <Hero />
-      <QuickBooking />
-      <Fleet />
-      <WhyChooseUs />
-      <HowItWorks />
-      <SpecialOffers />
-      <VehicleCategories />
-      <TrustStats />
-      <Reviews />
-      <About />
-      <FAQ />
-      <Contact />
-      <Footer />
+    <main style={{ background: "var(--bg)" }}>
+      <ZNavbar />
+      <ZHero />
+      <ZCollection />
+      <ZStats />
+      <ZFooter />
       <WhatsAppButton />
       <ScrollToTop />
     </main>
