@@ -1,16 +1,22 @@
 "use client";
 
-import { ArrowRight, Share2, Globe } from "lucide-react";
+import { ArrowRight, Share2, Globe, Phone, Mail } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 const services = [
-  "FLEET MANAGEMENT",
-  "CORPORATE TRAVEL",
-  "CONCIERGE DESK",
-  "PRIVATE EVENTS",
+  { label: "DAILY RENTALS", href: "/fleet" },
+  { label: "CORPORATE TRAVEL", href: "/booking" },
+  { label: "AIRPORT PICKUPS", href: "/booking" },
+  { label: "PRIVATE EVENTS", href: "/booking" },
 ];
 
-const navigation = ["LEGAL", "PRIVACY", "FLEET", "INVESTORS"];
+const navigation = [
+  { label: "HOME", href: "/" },
+  { label: "FLEET", href: "/fleet" },
+  { label: "ABOUT US", href: "/about" },
+  { label: "BOOK NOW", href: "/booking" },
+];
 
 export default function ZFooter() {
   const [email, setEmail] = useState("");
@@ -28,19 +34,37 @@ export default function ZFooter() {
 
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div
-              className="font-display font-bold text-white text-xl tracking-widest mb-4"
+            <Link
+              href="/"
+              className="font-display font-bold text-white text-xl tracking-widest mb-4 block"
               style={{ letterSpacing: "0.18em" }}
             >
               ENGENZ
-            </div>
+            </Link>
             <p
-              className="text-sm leading-relaxed mb-6 max-w-[220px]"
+              className="text-sm leading-relaxed mb-4 max-w-[220px]"
               style={{ color: "var(--text-muted)" }}
             >
-              Redefining the architecture of premium mobility. Precision rentals
-              for the modern explorer.
+              Premium car rental in Egypt. Reliable vehicles, transparent pricing,
+              and professional service.
             </p>
+            {/* Contact */}
+            <div className="space-y-2 mb-5">
+              <a
+                href="tel:+201152333633"
+                className="flex items-center gap-2 text-xs font-semibold transition-colors hover:text-white"
+                style={{ color: "var(--text-dim)" }}
+              >
+                <Phone size={11} /> +20 11 5233 3633
+              </a>
+              <a
+                href="mailto:info@engenz.com"
+                className="flex items-center gap-2 text-xs font-semibold transition-colors hover:text-white"
+                style={{ color: "var(--text-dim)" }}
+              >
+                <Mail size={11} /> info@engenz.com
+              </a>
+            </div>
             {/* Social icons */}
             <div className="flex items-center gap-3">
               {[Share2, Globe].map((Icon, i) => (
@@ -69,14 +93,14 @@ export default function ZFooter() {
             </div>
             <ul className="space-y-3">
               {services.map((s) => (
-                <li key={s}>
-                  <a
-                    href="#"
+                <li key={s.label}>
+                  <Link
+                    href={s.href}
                     className="text-xs font-semibold tracking-widest transition-colors hover:text-white"
                     style={{ color: "#3d4a63", letterSpacing: "0.1em" }}
                   >
-                    {s}
-                  </a>
+                    {s.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -92,14 +116,14 @@ export default function ZFooter() {
             </div>
             <ul className="space-y-3">
               {navigation.map((n) => (
-                <li key={n}>
-                  <a
-                    href="#"
+                <li key={n.label}>
+                  <Link
+                    href={n.href}
                     className="text-xs font-semibold tracking-widest transition-colors hover:text-white"
                     style={{ color: "#3d4a63", letterSpacing: "0.1em" }}
                   >
-                    {n}
-                  </a>
+                    {n.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -111,8 +135,11 @@ export default function ZFooter() {
               className="text-xs font-bold tracking-widest mb-5"
               style={{ color: "var(--text-muted)", letterSpacing: "0.18em" }}
             >
-              TELEMETRY NEWSLETTER
+              STAY UPDATED
             </div>
+            <p className="text-xs mb-4 leading-relaxed" style={{ color: "var(--text-dim)" }}>
+              Receive offers, new fleet arrivals, and rental tips.
+            </p>
             <div className="flex gap-0">
               <input
                 type="email"
@@ -143,10 +170,10 @@ export default function ZFooter() {
             className="text-xs tracking-widest"
             style={{ color: "var(--text-dim)", letterSpacing: "0.1em" }}
           >
-            © 2024 ENGENZ. ENGINEERED PRECISION.
+            © 2025 ENGENZ EGYPT. ALL RIGHTS RESERVED.
           </span>
           <div className="flex items-center gap-6">
-            {["TERMS OF SYSTEM USE", "DATA PROTOCOLS"].map((t) => (
+            {["PRIVACY POLICY", "TERMS OF USE"].map((t) => (
               <a
                 key={t}
                 href="#"
