@@ -87,8 +87,22 @@ export default function AboutPage() {
         {/* Hero */}
         <section
           className="relative pt-32 pb-20 overflow-hidden"
-          style={{ background: "linear-gradient(180deg, #040610 0%, var(--bg) 100%)" }}
+          style={{ background: "var(--bg)" }}
         >
+          {/* Luxury car background */}
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: "url('https://upload.wikimedia.org/wikipedia/commons/8/8f/Mercedes-Benz_E200_Sports_(W213)_front.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center 40%",
+              opacity: 0.07,
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(180deg, #040610 0%, rgba(7,8,16,0.9) 60%, var(--bg) 100%)" }}
+          />
           <div
             className="absolute inset-0 opacity-[0.025] pointer-events-none"
             style={{

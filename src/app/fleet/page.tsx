@@ -47,11 +47,24 @@ export default function FleetPage() {
         {/* Hero */}
         <section
           className="relative pt-32 pb-20 overflow-hidden"
-          style={{
-            background:
-              "linear-gradient(180deg, #040610 0%, #070810 60%, var(--bg) 100%)",
-          }}
+          style={{ background: "var(--bg)" }}
         >
+          {/* Luxury car background */}
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: "url('https://upload.wikimedia.org/wikipedia/commons/4/49/2024_Mercedes-Benz_W206_C180_Avantgarde_in_Mojave_Silver%2C_front_right%2C_07-10-2024.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center 35%",
+              opacity: 0.08,
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background: "linear-gradient(180deg, #040610 0%, rgba(7,8,16,0.85) 60%, var(--bg) 100%)",
+            }}
+          />
           {/* grid overlay */}
           <div
             className="absolute inset-0 opacity-[0.025] pointer-events-none"

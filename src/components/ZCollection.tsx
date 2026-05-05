@@ -1,13 +1,13 @@
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 const mainVehicle = {
   name: "PHANTOM X-1",
   badge: "EVO PERFORMANCE",
-  price: "STARTING FROM $450/DAY",
-  /* deep teal/midnight gradient to simulate a dark studio shoot */
+  price: "STARTING FROM 4,200 EGP/DAY",
   bg: "linear-gradient(160deg, #071a2e 0%, #0d2540 30%, #091e38 60%, #050f1e 100%)",
-  /* car silhouette accent glow */
   glow: "radial-gradient(ellipse 70% 40% at 50% 80%, rgba(0,160,255,0.18) 0%, transparent 70%)",
+  image: "https://upload.wikimedia.org/wikipedia/commons/5/59/BMW_320i_M_Sport_(G20)_front.jpg",
 };
 
 const sideVehicles = [
@@ -17,7 +17,7 @@ const sideVehicles = [
     bg: "linear-gradient(135deg, #0e1218 0%, #1a1f2e 50%, #0c1020 100%)",
     glow: "radial-gradient(ellipse 60% 50% at 50% 60%, rgba(180,120,0,0.15) 0%, transparent 70%)",
     icon: "🏍️",
-    iconSize: "text-[80px]",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/2020_Honda_CBR1000RR-R_Fireblade_SP_in_Grand_Prix_Red.jpg/1280px-2020_Honda_CBR1000RR-R_Fireblade_SP_in_Grand_Prix_Red.jpg",
   },
   {
     name: "ONYX TERRAIN",
@@ -25,7 +25,7 @@ const sideVehicles = [
     bg: "linear-gradient(135deg, #0a1520 0%, #111c28 50%, #0c1820 100%)",
     glow: "radial-gradient(ellipse 80% 50% at 50% 70%, rgba(0,80,160,0.2) 0%, transparent 70%)",
     icon: "🚙",
-    iconSize: "text-[75px]",
+    image: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Toyota_Fortuner_2.8_Q_4x2_2023.jpg",
   },
 ];
 
@@ -51,31 +51,24 @@ export default function ZCollection() {
           <div>
             <h2
               className="font-display font-bold italic leading-none"
-              style={{ fontSize: "clamp(2.2rem, 6vw, 4rem)", letterSpacing: "0.02em" }}
+              style={{ fontSize: "clamp(2.2rem, 6vw, 4rem)", letterSpacing: "0.02em", color: "var(--text)" }}
             >
-              <span className="text-white block">THE VANGUARD</span>
-              <span className="text-white block">COLLECTION</span>
+              <span className="block">THE VANGUARD</span>
+              <span className="block">COLLECTION</span>
             </h2>
-            {/* Accent rule */}
-            <div
-              className="mt-3 h-[2px] w-10"
-              style={{ background: "var(--accent)" }}
-            />
-            <p
-              className="mt-4 text-sm leading-relaxed max-w-sm"
-              style={{ color: "var(--text-muted)" }}
-            >
+            <div className="mt-3 h-[2px] w-10" style={{ background: "var(--accent)" }} />
+            <p className="mt-4 text-sm leading-relaxed max-w-sm" style={{ color: "var(--text-muted)" }}>
               Curated high-performance machinery. From twin-turbo V10 supercars
               to limited-edition racing superbikes.
             </p>
           </div>
-          <a
-            href="#"
+          <Link
+            href="/fleet"
             className="flex items-center gap-2 text-xs font-bold tracking-widest transition-colors hover:text-white whitespace-nowrap"
             style={{ color: "var(--text-muted)", letterSpacing: "0.12em" }}
           >
             VIEW FULL INVENTORY <ArrowRight size={14} />
-          </a>
+          </Link>
         </div>
 
         {/* Card grid */}
@@ -88,40 +81,31 @@ export default function ZCollection() {
               background: mainVehicle.bg,
               border: "1px solid rgba(255,255,255,0.07)",
               minHeight: "420px",
+              position: "relative",
+              overflow: "hidden",
             }}
           >
-            {/* Inner glow */}
+            {/* Real car image as CSS background */}
             <div
-              className="absolute inset-0 rounded-xl pointer-events-none"
-              style={{ background: mainVehicle.glow }}
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `url('${mainVehicle.image}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center 50%",
+                opacity: 0.55,
+              }}
             />
-
-            {/* Car emoji / illustration */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span
-                className="select-none"
-                style={{
-                  fontSize: "clamp(120px, 18vw, 200px)",
-                  filter: "drop-shadow(0 20px 60px rgba(0,160,255,0.3))",
-                  transform: "scaleX(-1) rotate(-5deg)",
-                }}
-              >
-                🏎️
-              </span>
-            </div>
+            {/* Inner glow */}
+            <div className="absolute inset-0 rounded-xl pointer-events-none" style={{ background: mainVehicle.glow }} />
 
             {/* Overlay gradient at bottom */}
             <div
-              className="absolute inset-x-0 bottom-0 h-48 rounded-b-xl"
-              style={{
-                background:
-                  "linear-gradient(to top, rgba(5,10,20,0.95) 0%, transparent 100%)",
-              }}
+              className="absolute inset-x-0 bottom-0 h-56 rounded-b-xl"
+              style={{ background: "linear-gradient(to top, rgba(5,10,20,0.97) 0%, transparent 100%)" }}
             />
 
             {/* Card info */}
             <div className="absolute bottom-0 left-0 right-0 p-6">
-              {/* Badge */}
               <div
                 className="inline-flex items-center px-2.5 py-1 rounded-sm text-xs font-bold tracking-widest mb-3"
                 style={{
@@ -162,34 +146,23 @@ export default function ZCollection() {
                   overflow: "hidden",
                 }}
               >
-                {/* Inner glow */}
+                {/* Real car image */}
                 <div
-                  className="absolute inset-0 rounded-xl pointer-events-none"
-                  style={{ background: v.glow }}
+                  className="absolute inset-0"
+                  style={{
+                    backgroundImage: `url('${v.image}')`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center 40%",
+                    opacity: 0.45,
+                  }}
                 />
-
-                {/* Vehicle icon */}
-                <div
-                  className="absolute inset-0 flex items-center justify-center"
-                  style={{ paddingBottom: "40px" }}
-                >
-                  <span
-                    className={`select-none ${v.iconSize}`}
-                    style={{
-                      filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.6))",
-                    }}
-                  >
-                    {v.icon}
-                  </span>
-                </div>
+                {/* Inner glow */}
+                <div className="absolute inset-0 rounded-xl pointer-events-none" style={{ background: v.glow }} />
 
                 {/* Bottom gradient */}
                 <div
                   className="absolute inset-x-0 bottom-0 h-28 rounded-b-xl"
-                  style={{
-                    background:
-                      "linear-gradient(to top, rgba(5,8,18,0.97) 0%, transparent 100%)",
-                  }}
+                  style={{ background: "linear-gradient(to top, rgba(5,8,18,0.97) 0%, transparent 100%)" }}
                 />
 
                 {/* Card label */}

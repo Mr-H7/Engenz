@@ -5,6 +5,7 @@ import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { vehicles, getVehicleBySlug } from "@/data/vehicles";
 import { ArrowLeft, Phone, MessageCircle, Mail, MapPin, CheckCircle, Users, Fuel, Settings } from "lucide-react";
+import { saveBooking } from "@/utils/bookingStore";
 
 const LOCATIONS = [
   "Cairo — Heliopolis",
@@ -79,6 +80,19 @@ export default function BookingForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    saveBooking({
+      fullName: form.fullName,
+      phone: form.phone,
+      email: form.email,
+      nationality: form.nationality,
+      vehicle: form.vehicle,
+      pickupDate: form.pickupDate,
+      returnDate: form.returnDate,
+      pickupLocation: form.pickupLocation,
+      dropoffLocation: form.dropoffLocation,
+      notes: form.notes,
+      estimatedTotal: estimatedTotal,
+    });
     setSubmitted(true);
   };
 
@@ -140,8 +154,22 @@ export default function BookingForm() {
       {/* Page hero */}
       <section
         className="relative pt-32 pb-10 overflow-hidden"
-        style={{ background: "linear-gradient(180deg, #040610 0%, var(--bg) 100%)" }}
+        style={{ background: "var(--bg)" }}
       >
+        {/* Luxury car background */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url('https://upload.wikimedia.org/wikipedia/commons/5/59/BMW_320i_M_Sport_(G20)_front.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center 30%",
+            opacity: 0.07,
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(180deg, #040610 0%, rgba(7,8,16,0.9) 70%, var(--bg) 100%)" }}
+        />
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[300px] pointer-events-none"
           style={{
@@ -349,6 +377,7 @@ export default function BookingForm() {
                   <input
                     type="date"
                     value={form.returnDate}
+                    min={form.pickupDate || undefined}
                     onChange={set("returnDate")}
                     required
                     className={inputClass}
@@ -434,11 +463,11 @@ export default function BookingForm() {
           </form>
 
           {/* Sidebar */}
-          <div className="space-y-5">
+          <div className="space-y-5 lg:self-start lg:sticky" style={{ top: "80px" }}>
 
             {/* Rental summary */}
             <div
-              className="rounded-xl p-6 sticky top-24"
+              className="rounded-xl p-6"
               style={{
                 background: "rgba(255,255,255,0.03)",
                 border: "1px solid rgba(255,255,255,0.08)",

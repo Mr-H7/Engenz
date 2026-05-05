@@ -16,6 +16,61 @@
   --green: #22c55e;
 }
 
+/* Light mode overrides */
+.light-mode {
+  --bg: #f0f4ff;
+  --bg-2: #e4eaf8;
+  --bg-3: #dae2f5;
+  --bg-card: #edf1fb;
+  --border: rgba(0,0,0,0.08);
+  --border-bright: rgba(0,0,0,0.14);
+  --accent: #0080cc;
+  --accent-dim: rgba(0,128,204,0.12);
+  --accent-glow: rgba(0,128,204,0.2);
+  --text: #0a0f1e;
+  --text-muted: #4a5875;
+  --text-dim: #8899bb;
+  --green: #16a34a;
+}
+
+.light-mode body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.light-mode ::-webkit-scrollbar-track { background: var(--bg); }
+.light-mode ::-webkit-scrollbar-thumb { background: #c0cce8; }
+
+.light-mode .glass-card {
+  background: rgba(255,255,255,0.85);
+  border-color: rgba(0,0,0,0.1);
+}
+
+.light-mode .btn-accent {
+  background: var(--accent);
+  color: #fff;
+}
+
+.light-mode .btn-outline {
+  border-color: rgba(0,0,0,0.2);
+  color: var(--text);
+}
+
+.light-mode .portal-input {
+  background: rgba(255,255,255,0.9);
+  border-color: rgba(0,0,0,0.15);
+  color: var(--text);
+}
+
+.light-mode .portal-input::placeholder {
+  color: var(--text-muted);
+}
+
+.light-mode .portal-input option {
+  background: #f0f4ff;
+  color: #0a0f1e;
+}
+
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--text);
