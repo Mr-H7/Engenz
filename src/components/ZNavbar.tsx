@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useLang } from "@/contexts/LanguageContext";
+import EngenzLogo from "@/components/EngenzLogo";
 
 export default function ZNavbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -47,25 +48,8 @@ export default function ZNavbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-[60px] flex items-center justify-between gap-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 whitespace-nowrap flex-shrink-0">
-          <span
-            className="font-display font-bold text-lg tracking-wider"
-            style={{ letterSpacing: "0.15em", color: "var(--text)" }}
-          >
-            ENGENZ
-          </span>
-          <span
-            className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold tracking-wide"
-            style={{
-              background: "linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%)",
-              color: "#fff",
-              fontSize: "0.6rem",
-              letterSpacing: "0.08em",
-              boxShadow: "0 0 10px rgba(0,212,255,0.45), 0 0 20px rgba(124,58,237,0.2)",
-            }}
-          >
-            S
-          </span>
+        <Link href="/" className="whitespace-nowrap flex-shrink-0 flex items-center">
+          <EngenzLogo />
         </Link>
 
         {/* Nav links — desktop */}
