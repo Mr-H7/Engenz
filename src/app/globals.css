@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* ── Design tokens ── */
 :root {
   --bg: #070810;
   --bg-2: #0d0f1a;
@@ -14,23 +15,32 @@
   --text-muted: #6b7a99;
   --text-dim: #3d4a63;
   --green: #22c55e;
+  /* Animated shape base colors (dark) */
+  --orb-color: rgba(0, 212, 255, 0.055);
+  --ring-color: rgba(0, 180, 255, 0.12);
+  --line-color: rgba(0, 212, 255, 0.06);
+  --spark-color: rgba(0, 212, 255, 0.7);
 }
 
-/* Light mode overrides */
+/* ── Light mode overrides ── */
 .light-mode {
-  --bg: #f0f4ff;
-  --bg-2: #e4eaf8;
-  --bg-3: #dae2f5;
-  --bg-card: #edf1fb;
-  --border: rgba(0,0,0,0.08);
-  --border-bright: rgba(0,0,0,0.14);
-  --accent: #0080cc;
-  --accent-dim: rgba(0,128,204,0.12);
-  --accent-glow: rgba(0,128,204,0.2);
-  --text: #0a0f1e;
-  --text-muted: #4a5875;
-  --text-dim: #8899bb;
-  --green: #16a34a;
+  --bg: #f5f7ff;
+  --bg-2: #eaefff;
+  --bg-3: #dde5ff;
+  --bg-card: #ffffff;
+  --border: rgba(30,60,180,0.09);
+  --border-bright: rgba(30,60,180,0.16);
+  --accent: #0055cc;
+  --accent-dim: rgba(0,85,204,0.1);
+  --accent-glow: rgba(0,85,204,0.18);
+  --text: #0a0f28;
+  --text-muted: #4050a0;
+  --text-dim: #8899cc;
+  --green: #15803d;
+  --orb-color: rgba(0, 85, 204, 0.07);
+  --ring-color: rgba(80, 120, 255, 0.14);
+  --line-color: rgba(0, 85, 204, 0.08);
+  --spark-color: rgba(0, 85, 204, 0.8);
 }
 
 .light-mode body {
@@ -38,39 +48,80 @@
   color: var(--text);
 }
 
-.light-mode ::-webkit-scrollbar-track { background: var(--bg); }
-.light-mode ::-webkit-scrollbar-thumb { background: #c0cce8; }
+.light-mode ::-webkit-scrollbar-track { background: var(--bg-2); }
+.light-mode ::-webkit-scrollbar-thumb { background: #a0b4e8; }
 
 .light-mode .glass-card {
-  background: rgba(255,255,255,0.85);
-  border-color: rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--border-bright);
+  box-shadow: 0 8px 40px rgba(0, 60, 180, 0.1);
 }
 
 .light-mode .btn-accent {
   background: var(--accent);
-  color: #fff;
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 85, 204, 0.3);
+}
+
+.light-mode .btn-accent:hover {
+  background: #0044aa;
+  box-shadow: 0 6px 28px rgba(0, 85, 204, 0.45);
 }
 
 .light-mode .btn-outline {
-  border-color: rgba(0,0,0,0.2);
+  border-color: var(--border-bright);
   color: var(--text);
+  background: rgba(0, 60, 180, 0.04);
+}
+
+.light-mode .btn-outline:hover {
+  border-color: var(--accent);
+  background: rgba(0, 85, 204, 0.08);
 }
 
 .light-mode .portal-input {
-  background: rgba(255,255,255,0.9);
-  border-color: rgba(0,0,0,0.15);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(30, 60, 180, 0.18);
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(0, 60, 180, 0.06);
+}
+
+.light-mode .portal-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 85, 204, 0.12);
+}
+
+.light-mode .portal-input::placeholder { color: var(--text-muted); }
+
+.light-mode .portal-input option {
+  background: #ffffff;
   color: var(--text);
 }
 
-.light-mode .portal-input::placeholder {
-  color: var(--text-muted);
+.light-mode .feature-box {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: var(--border-bright);
+  box-shadow: 0 2px 12px rgba(0, 60, 180, 0.07);
 }
 
-.light-mode .portal-input option {
-  background: #f0f4ff;
-  color: #0a0f1e;
+.light-mode .feature-box:hover {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 20px rgba(0, 60, 180, 0.12);
 }
 
+.light-mode .status-badge {
+  background: rgba(21,128,61,0.1);
+  border-color: rgba(21,128,61,0.22);
+  color: #15803d;
+}
+
+.light-mode .nav-link { color: var(--text-muted); }
+.light-mode .nav-link:hover { color: var(--text); }
+.light-mode .nav-link.active { color: var(--accent); }
+.light-mode .nav-link.active::after { background: var(--accent); }
+
+/* ── Tailwind theme ── */
 @theme inline {
   --color-background: var(--bg);
   --color-foreground: var(--text);
@@ -79,7 +130,6 @@
 }
 
 * { box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 
 body {
@@ -88,6 +138,26 @@ body {
   font-family: var(--font-inter), 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Fixed full-site car background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/5/59/BMW_320i_M_Sport_(G20)_front.jpg');
+  background-size: cover;
+  background-position: center 30%;
+  opacity: 0.035;
+  filter: blur(30px) saturate(1.4);
+  pointer-events: none;
+}
+
+.light-mode body::before {
+  opacity: 0.06;
+  filter: blur(40px) saturate(0.8);
 }
 
 /* Scrollbar */
@@ -95,12 +165,19 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: #1e2235; border-radius: 2px; }
 
-/* Display font utility */
-.font-display {
-  font-family: var(--font-oswald), 'Oswald', sans-serif;
+/* Arabic font override */
+html[lang="ar"] .font-display,
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] h4,
+html[lang="ar"] button,
+html[lang="ar"] .tracking-widest {
+  font-family: var(--font-cairo), 'Cairo', sans-serif;
+  letter-spacing: 0 !important;
 }
 
-/* Accent text */
+.font-display { font-family: var(--font-oswald), 'Oswald', sans-serif; }
 .text-accent { color: var(--accent); }
 
 /* Glass card */
@@ -117,10 +194,11 @@ body {
   color: #03060a;
   font-weight: 700;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 .btn-accent:hover {
-  background: #33dcff;
-  box-shadow: 0 0 25px rgba(0,212,255,0.4);
+  filter: brightness(1.12);
+  box-shadow: 0 0 25px var(--accent-glow);
 }
 
 /* Outline button */
@@ -129,6 +207,7 @@ body {
   border: 1px solid var(--border-bright);
   color: var(--text);
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 .btn-outline:hover {
   border-color: rgba(255,255,255,0.3);
@@ -152,16 +231,11 @@ body {
   overflow: hidden;
   transition: all 0.4s ease;
 }
-.fleet-card:hover {
-  transform: translateY(-4px);
-}
-.fleet-card:hover .fleet-card-overlay {
-  opacity: 0.6;
-}
+.fleet-card:hover { transform: translateY(-4px); }
 
 /* Nav link */
 .nav-link {
-  color: #6b7a99;
+  color: var(--text-muted);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -169,10 +243,8 @@ body {
   transition: color 0.2s ease;
   position: relative;
 }
-.nav-link:hover { color: #fff; }
-.nav-link.active {
-  color: var(--accent);
-}
+.nav-link:hover { color: var(--text); }
+.nav-link.active { color: var(--accent); }
 .nav-link.active::after {
   content: '';
   position: absolute;
@@ -183,51 +255,39 @@ body {
   background: var(--accent);
 }
 
-/* Animate on scroll */
+/* Animations */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
+.animate-fade-up { animation: fadeUp 0.7s ease forwards; }
 
-.animate-fade-up {
-  animation: fadeUp 0.7s ease forwards;
-}
+.glow-cyan { text-shadow: 0 0 30px rgba(0,212,255,0.4); }
 
-/* Glow text */
-.glow-cyan {
-  text-shadow: 0 0 30px rgba(0,212,255,0.4);
-}
-
-/* Status badge */
 .status-badge {
   background: rgba(34,197,94,0.12);
   border: 1px solid rgba(34,197,94,0.25);
   color: #22c55e;
 }
 
-/* Ticker / live dot */
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.3; }
 }
-.live-dot {
-  animation: blink 1.8s ease-in-out infinite;
-}
+.live-dot { animation: blink 1.8s ease-in-out infinite; }
 
 /* Input */
 .portal-input {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1);
-  color: #fff;
+  color: var(--text);
   transition: border-color 0.2s ease;
 }
 .portal-input:focus {
   outline: none;
   border-color: rgba(0,212,255,0.5);
 }
-.portal-input::placeholder {
-  color: var(--text-muted);
-}
+.portal-input::placeholder { color: var(--text-muted); }
 
 /* Vehicle type tab */
 .vehicle-tab {
@@ -243,6 +303,142 @@ body {
   color: var(--text-muted);
 }
 .vehicle-tab:not(.active):hover {
-  color: #fff;
+  color: var(--text);
   background: rgba(255,255,255,0.05);
 }
+
+/* ── Animated background shapes ── */
+
+/* Drifting orbs */
+.anim-orb {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+  filter: blur(60px);
+  background: var(--orb-color);
+}
+
+.anim-orb-1 {
+  width: 700px; height: 700px;
+  top: -15%; left: -10%;
+  background: radial-gradient(ellipse, var(--orb-color) 0%, transparent 70%);
+  animation: orbFloat1 22s ease-in-out infinite;
+}
+.anim-orb-2 {
+  width: 500px; height: 500px;
+  top: 40%; right: -8%;
+  background: radial-gradient(ellipse, rgba(120,80,255,0.05) 0%, transparent 70%);
+  animation: orbFloat2 28s ease-in-out infinite;
+}
+.anim-orb-3 {
+  width: 400px; height: 400px;
+  bottom: 5%; left: 30%;
+  background: radial-gradient(ellipse, var(--orb-color) 0%, transparent 70%);
+  animation: orbFloat3 18s ease-in-out infinite;
+}
+
+@keyframes orbFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(60px, 80px) scale(1.05); }
+  50% { transform: translate(30px, 160px) scale(0.95); }
+  75% { transform: translate(-40px, 80px) scale(1.02); }
+}
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(-80px, 60px); }
+  66% { transform: translate(-40px, -40px); }
+}
+@keyframes orbFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(50px, -60px) scale(1.1); }
+}
+
+/* Geometric rings */
+.anim-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--ring-color);
+  will-change: transform;
+}
+.anim-ring-1 {
+  width: 320px; height: 320px;
+  top: 12%; right: 15%;
+  animation: ringRotate 30s linear infinite;
+}
+.anim-ring-2 {
+  width: 180px; height: 180px;
+  bottom: 25%; left: 8%;
+  animation: ringRotate 20s linear infinite reverse;
+  border-color: rgba(120,80,255,0.1);
+}
+
+@keyframes ringRotate {
+  from { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.08); }
+  to { transform: rotate(360deg) scale(1); }
+}
+
+/* Floating thin lines */
+.anim-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-color), transparent);
+  will-change: transform, opacity;
+}
+.anim-line-1 {
+  width: 40%; top: 28%; left: 0;
+  animation: lineDrift1 14s ease-in-out infinite;
+}
+.anim-line-2 {
+  width: 30%; top: 60%; right: 0;
+  animation: lineDrift2 18s ease-in-out infinite;
+}
+.anim-line-3 {
+  width: 20%; bottom: 35%; left: 20%;
+  animation: lineDrift1 22s ease-in-out infinite reverse;
+}
+
+@keyframes lineDrift1 {
+  0%, 100% { transform: translateX(0) scaleX(1); opacity: 0.4; }
+  50% { transform: translateX(40px) scaleX(1.3); opacity: 0.9; }
+}
+@keyframes lineDrift2 {
+  0%, 100% { transform: translateX(0) scaleX(1); opacity: 0.3; }
+  50% { transform: translateX(-50px) scaleX(0.8); opacity: 0.8; }
+}
+
+/* Tiny sparks / dots */
+.anim-spark {
+  position: absolute;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--spark-color);
+  will-change: transform, opacity;
+}
+.anim-spark-1 {
+  top: 20%; left: 25%;
+  animation: sparkPulse 4s ease-in-out infinite;
+}
+.anim-spark-2 {
+  top: 65%; right: 20%;
+  animation: sparkPulse 5.5s ease-in-out infinite 1s;
+}
+.anim-spark-3 {
+  bottom: 30%; left: 60%;
+  animation: sparkPulse 3.5s ease-in-out infinite 0.5s;
+}
+.anim-spark-4 {
+  top: 45%; left: 80%;
+  animation: sparkPulse 6s ease-in-out infinite 2s;
+}
+
+@keyframes sparkPulse {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(2.5); opacity: 1; box-shadow: 0 0 12px var(--spark-color); }
+}
+
+/* Light mode shape adjustments */
+.light-mode .anim-orb-1 { filter: blur(80px); }
+.light-mode .anim-orb-2 { filter: blur(80px); }
+.light-mode .anim-ring-1 { border-color: rgba(0, 85, 204, 0.12); }
+.light-mode .anim-ring-2 { border-color: rgba(80, 60, 200, 0.12); }

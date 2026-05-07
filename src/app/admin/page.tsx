@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Lock, LogOut, CheckCircle, XCircle, Clock, Trash2, ArrowLeft } from "lucide-react";
-import { getBookings, updateBookingStatus, type Booking } from "@/utils/bookingStore";
+import { Lock, LogOut, CheckCircle, XCircle, Clock, Trash2, ArrowLeft, Trash } from "lucide-react";
+import { getBookings, updateBookingStatus, deleteBooking, type Booking } from "@/utils/bookingStore";
 import ZNavbar from "@/components/ZNavbar";
 
-const ADMIN_PASSWORD = "engenz2026";
+const ADMIN_PASSWORD = "admin123";
 
 function formatDate(iso: string) {
   if (!iso) return "—";
@@ -73,6 +73,13 @@ export default function AdminPage() {
   const updateStatus = (id: string, status: Booking["status"]) => {
     updateBookingStatus(id, status);
     setBookings(getBookings());
+  };
+
+  const handleDelete = (id: string) => {
+    if (confirm("Delete this booking? This cannot be undone.")) {
+      deleteBooking(id);
+      setBookings(getBookings());
+    }
   };
 
   const clearAll = () => {
@@ -303,6 +310,18 @@ export default function AdminPage() {
 
                     {/* Actions */}
                     <div className="flex flex-row lg:flex-col gap-2 flex-shrink-0">
+                      <button
+                        onClick={() => handleDelete(b.id)}
+                        className="flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-bold tracking-widest transition-all"
+                        style={{
+                          background: "rgba(100,20,20,0.2)",
+                          border: "1px solid rgba(239,68,68,0.3)",
+                          color: "#ef4444",
+                          letterSpacing: "0.08em",
+                        }}
+                      >
+                        <Trash size={12} /> DELETE
+                      </button>
                       {b.status !== "confirmed" && (
                         <button
                           onClick={() => updateStatus(b.id, "confirmed")}

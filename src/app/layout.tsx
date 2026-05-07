@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Oswald } from "next/font/google";
+import { Inter, Oswald, Cairo } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -13,6 +14,13 @@ const oswald = Oswald({
   variable: "--font-oswald",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const cairo = Cairo({
+  variable: "--font-cairo",
+  subsets: ["arabic", "latin"],
+  weight: ["400", "600", "700", "900"],
   display: "swap",
 });
 
@@ -32,8 +40,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${oswald.variable} antialiased`}>
+    <html lang="en" className={`${inter.variable} ${oswald.variable} ${cairo.variable} antialiased`}>
       <body>
+        <AnimatedBackground />
         <Providers>{children}</Providers>
       </body>
     </html>

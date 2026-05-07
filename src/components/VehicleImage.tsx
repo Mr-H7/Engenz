@@ -29,20 +29,28 @@ export default function VehicleImage({
         className={`relative overflow-hidden ${className}`}
         style={{ background: bgGradient, ...style }}
       >
+        {/* Studio floor glow — grounds the car visually */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `radial-gradient(ellipse 90% 50% at 50% 100%, ${glowColor} 0%, transparent 65%)`,
+          }}
+        />
+        {/* Full car visible — object-contain mimics a studio product shot */}
         <Image
           src={image}
           alt={name}
           fill
           priority={priority}
-          className="object-cover object-center"
+          className="object-contain object-bottom"
+          style={{ padding: "8% 6% 4%" }}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
-        {/* subtle dark vignette for text legibility */}
+        {/* Subtle bottom shadow for depth */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
           style={{
-            background:
-              "linear-gradient(to top, rgba(5,8,20,0.85) 0%, rgba(5,8,20,0.1) 50%, transparent 100%)",
+            background: "linear-gradient(to top, rgba(4,6,16,0.6) 0%, transparent 100%)",
           }}
         />
       </div>

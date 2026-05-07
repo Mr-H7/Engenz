@@ -49,6 +49,12 @@ export function saveBooking(booking: Omit<Booking, "id" | "submittedAt" | "statu
   return newBooking;
 }
 
+export function deleteBooking(id: string) {
+  const bookings = getBookings();
+  const updated = bookings.filter((b) => b.id !== id);
+  localStorage.setItem(BOOKINGS_KEY, JSON.stringify(updated));
+}
+
 export function updateBookingStatus(id: string, status: Booking["status"]) {
   const bookings = getBookings();
   const idx = bookings.findIndex((b) => b.id === id);

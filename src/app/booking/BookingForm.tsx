@@ -6,6 +6,7 @@ import Link from "next/link";
 import { vehicles, getVehicleBySlug } from "@/data/vehicles";
 import { ArrowLeft, Phone, MessageCircle, Mail, MapPin, CheckCircle, Users, Fuel, Settings } from "lucide-react";
 import { saveBooking } from "@/utils/bookingStore";
+import { useLang } from "@/contexts/LanguageContext";
 
 const LOCATIONS = [
   "Cairo — Heliopolis",
@@ -36,6 +37,8 @@ type FormData = {
 };
 
 export default function BookingForm() {
+  const { t } = useLang();
+  const b = t.booking;
   const searchParams = useSearchParams();
   const carSlug = searchParams.get("car") ?? "";
 
@@ -97,47 +100,25 @@ export default function BookingForm() {
   };
 
   if (submitted) {
+    const msg = b.successMsg
+      .replace("{name}", form.fullName || "valued customer")
+      .replace("{phone}", form.phone);
     return (
       <div className="min-h-screen flex items-center justify-center px-6">
-        <div
-          className="max-w-md w-full rounded-2xl p-10 text-center"
-          style={{
-            background: "rgba(0,212,255,0.06)",
-            border: "1px solid rgba(0,212,255,0.2)",
-          }}
-        >
+        <div className="max-w-md w-full rounded-2xl p-10 text-center" style={{ background: "rgba(0,212,255,0.06)", border: "1px solid rgba(0,212,255,0.2)" }}>
           <div className="text-5xl mb-6">✅</div>
-          <h2
-            className="font-display font-bold text-white mb-3"
-            style={{ fontSize: "1.8rem", letterSpacing: "0.06em" }}
-          >
-            REQUEST RECEIVED
+          <h2 className="font-display font-bold mb-3" style={{ fontSize: "1.8rem", letterSpacing: "0.06em", color: "var(--text)" }}>
+            {b.successTitle}
           </h2>
-          <p
-            className="text-sm leading-relaxed mb-8"
-            style={{ color: "var(--text-muted)" }}
-          >
-            Thank you, {form.fullName || "valued customer"}. Your booking request has been
-            submitted. The ENGENZ team will contact you on{" "}
-            <span className="text-white font-bold">{form.phone}</span> within 2 hours to
-            confirm availability and finalize your rental.
+          <p className="text-sm leading-relaxed mb-8" style={{ color: "var(--text-muted)" }}>
+            {msg.split(form.phone)[0]}
+            <span style={{ color: "var(--text)", fontWeight: 700 }}>{form.phone}</span>
+            {msg.split(form.phone)[1]}
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
-            <Link
-              href="/fleet"
-              className="btn-outline px-6 py-2.5 rounded-md text-xs font-bold tracking-widest"
-              style={{ letterSpacing: "0.1em" }}
-            >
-              EXPLORE MORE CARS
-            </Link>
-            <a
-              href="https://wa.me/201152333633"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-accent px-6 py-2.5 rounded-md text-xs font-bold tracking-widest flex items-center gap-2"
-              style={{ letterSpacing: "0.1em" }}
-            >
-              <MessageCircle size={13} /> WHATSAPP US
+            <Link href="/fleet" className="btn-outline px-6 py-2.5 rounded-md text-xs font-bold tracking-widest" style={{ letterSpacing: "0.1em" }}>{b.exploreMore}</Link>
+            <a href="https://wa.me/201152333633" target="_blank" rel="noopener noreferrer" className="btn-accent px-6 py-2.5 rounded-md text-xs font-bold tracking-widest flex items-center gap-2" style={{ letterSpacing: "0.1em" }}>
+              <MessageCircle size={13} /> {b.whatsapp}
             </a>
           </div>
         </div>
@@ -178,26 +159,13 @@ export default function BookingForm() {
           }}
         />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
-          <Link
-            href="/fleet"
-            className="inline-flex items-center gap-2 text-xs font-bold tracking-widest mb-8 transition-colors hover:text-white"
-            style={{ color: "var(--text-muted)", letterSpacing: "0.1em" }}
-          >
-            <ArrowLeft size={13} /> BACK TO FLEET
+          <Link href="/fleet" className="inline-flex items-center gap-2 text-xs font-bold tracking-widest mb-8 transition-colors hover:text-white" style={{ color: "var(--text-muted)", letterSpacing: "0.1em" }}>
+            <ArrowLeft size={13} /> {b.backToFleet}
           </Link>
-          <h1
-            className="font-display font-bold text-white leading-none mb-3"
-            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", letterSpacing: "0.04em" }}
-          >
-            BOOK YOUR VEHICLE
+          <h1 className="font-display font-bold leading-none mb-3" style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", letterSpacing: "0.04em", color: "var(--text)" }}>
+            {b.title}
           </h1>
-          <p
-            className="text-sm leading-relaxed max-w-lg"
-            style={{ color: "var(--text-muted)" }}
-          >
-            Fill in your details below. Our team confirms availability and contacts
-            you within 2 hours.
-          </p>
+          <p className="text-sm leading-relaxed max-w-lg" style={{ color: "var(--text-muted)" }}>{b.sub}</p>
         </div>
       </section>
 
@@ -216,12 +184,7 @@ export default function BookingForm() {
                 border: "1px solid rgba(255,255,255,0.08)",
               }}
             >
-              <h2
-                className="font-display font-bold text-white mb-5"
-                style={{ fontSize: "1.1rem", letterSpacing: "0.08em" }}
-              >
-                SELECTED VEHICLE
-              </h2>
+              <h2 className="font-display font-bold mb-5" style={{ fontSize: "1.1rem", letterSpacing: "0.08em", color: "var(--text)" }}>{b.selectedVehicle}</h2>
 
               {/* Vehicle preview */}
               {selectedVehicle && (
@@ -265,17 +228,15 @@ export default function BookingForm() {
               )}
 
               <div>
-                <label className={labelClass} style={labelStyle}>
-                  CHOOSE VEHICLE
-                </label>
+                <label className={labelClass} style={labelStyle}>{b.chooseVehicle}</label>
                 <select
                   value={form.vehicle}
                   onChange={set("vehicle")}
                   required
                   className={inputClass}
-                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "#fff" }}
+                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--text)" }}
                 >
-                  <option value="">— SELECT A VEHICLE —</option>
+                  <option value="">{b.chooseVehiclePlaceholder}</option>
                   {vehicles.map((v) => (
                     <option key={v.slug} value={v.slug} style={{ background: "#070810" }}>
                       {v.name} {v.year} — {v.pricePerDay.toLocaleString("en-EG")} EGP/day
@@ -294,54 +255,23 @@ export default function BookingForm() {
                 border: "1px solid rgba(255,255,255,0.08)",
               }}
             >
-              <h2
-                className="font-display font-bold text-white mb-5"
-                style={{ fontSize: "1.1rem", letterSpacing: "0.08em" }}
-              >
-                PERSONAL INFORMATION
-              </h2>
+              <h2 className="font-display font-bold mb-5" style={{ fontSize: "1.1rem", letterSpacing: "0.08em", color: "var(--text)" }}>{b.personalInfo}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className={labelClass} style={labelStyle}>FULL NAME *</label>
-                  <input
-                    type="text"
-                    placeholder="Ahmed Mohamed"
-                    value={form.fullName}
-                    onChange={set("fullName")}
-                    required
-                    className={inputClass}
-                  />
+                  <label className={labelClass} style={labelStyle}>{b.fullName}</label>
+                  <input type="text" placeholder="Ahmed Mohamed" value={form.fullName} onChange={set("fullName")} required className={inputClass} />
                 </div>
                 <div>
-                  <label className={labelClass} style={labelStyle}>PHONE NUMBER *</label>
-                  <input
-                    type="tel"
-                    placeholder="+20 10 XXXX XXXX"
-                    value={form.phone}
-                    onChange={set("phone")}
-                    required
-                    className={inputClass}
-                  />
+                  <label className={labelClass} style={labelStyle}>{b.phone}</label>
+                  <input type="tel" placeholder="+20 10 XXXX XXXX" value={form.phone} onChange={set("phone")} required className={inputClass} />
                 </div>
                 <div>
-                  <label className={labelClass} style={labelStyle}>EMAIL ADDRESS</label>
-                  <input
-                    type="email"
-                    placeholder="ahmed@example.com"
-                    value={form.email}
-                    onChange={set("email")}
-                    className={inputClass}
-                  />
+                  <label className={labelClass} style={labelStyle}>{b.email}</label>
+                  <input type="email" placeholder="ahmed@example.com" value={form.email} onChange={set("email")} className={inputClass} />
                 </div>
                 <div>
-                  <label className={labelClass} style={labelStyle}>NATIONALITY</label>
-                  <input
-                    type="text"
-                    placeholder="Egyptian"
-                    value={form.nationality}
-                    onChange={set("nationality")}
-                    className={inputClass}
-                  />
+                  <label className={labelClass} style={labelStyle}>{b.nationality}</label>
+                  <input type="text" placeholder="Egyptian" value={form.nationality} onChange={set("nationality")} className={inputClass} />
                 </div>
               </div>
             </div>
@@ -354,112 +284,44 @@ export default function BookingForm() {
                 border: "1px solid rgba(255,255,255,0.08)",
               }}
             >
-              <h2
-                className="font-display font-bold text-white mb-5"
-                style={{ fontSize: "1.1rem", letterSpacing: "0.08em" }}
-              >
-                RENTAL DETAILS
-              </h2>
+              <h2 className="font-display font-bold mb-5" style={{ fontSize: "1.1rem", letterSpacing: "0.08em", color: "var(--text)" }}>{b.rentalDetails}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className={labelClass} style={labelStyle}>PICKUP DATE *</label>
-                  <input
-                    type="date"
-                    value={form.pickupDate}
-                    onChange={set("pickupDate")}
-                    required
-                    className={inputClass}
-                    style={{ colorScheme: "dark" }}
-                  />
+                  <label className={labelClass} style={labelStyle}>{b.pickupDate}</label>
+                  <input type="date" value={form.pickupDate} onChange={set("pickupDate")} required className={inputClass} style={{ colorScheme: "dark" }} />
                 </div>
                 <div>
-                  <label className={labelClass} style={labelStyle}>RETURN DATE *</label>
-                  <input
-                    type="date"
-                    value={form.returnDate}
-                    min={form.pickupDate || undefined}
-                    onChange={set("returnDate")}
-                    required
-                    className={inputClass}
-                    style={{ colorScheme: "dark" }}
-                  />
+                  <label className={labelClass} style={labelStyle}>{b.returnDate}</label>
+                  <input type="date" value={form.returnDate} min={form.pickupDate || undefined} onChange={set("returnDate")} required className={inputClass} style={{ colorScheme: "dark" }} />
                 </div>
                 <div>
-                  <label className={labelClass} style={labelStyle}>PICKUP LOCATION *</label>
-                  <select
-                    value={form.pickupLocation}
-                    onChange={set("pickupLocation")}
-                    required
-                    className={inputClass}
-                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "#fff" }}
-                  >
-                    <option value="">— SELECT LOCATION —</option>
-                    {LOCATIONS.map((l) => (
-                      <option key={l} value={l} style={{ background: "#070810" }}>{l}</option>
-                    ))}
+                  <label className={labelClass} style={labelStyle}>{b.pickupLocation}</label>
+                  <select value={form.pickupLocation} onChange={set("pickupLocation")} required className={inputClass} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--text)" }}>
+                    <option value="">{b.selectLocation}</option>
+                    {LOCATIONS.map((l) => (<option key={l} value={l} style={{ background: "#070810" }}>{l}</option>))}
                   </select>
                 </div>
                 <div>
-                  <label className={labelClass} style={labelStyle}>DROP-OFF LOCATION *</label>
-                  <select
-                    value={form.dropoffLocation}
-                    onChange={set("dropoffLocation")}
-                    required
-                    className={inputClass}
-                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "#fff" }}
-                  >
-                    <option value="">— SELECT LOCATION —</option>
-                    {LOCATIONS.map((l) => (
-                      <option key={l} value={l} style={{ background: "#070810" }}>{l}</option>
-                    ))}
+                  <label className={labelClass} style={labelStyle}>{b.dropoff}</label>
+                  <select value={form.dropoffLocation} onChange={set("dropoffLocation")} required className={inputClass} style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--text)" }}>
+                    <option value="">{b.selectLocation}</option>
+                    {LOCATIONS.map((l) => (<option key={l} value={l} style={{ background: "#070810" }}>{l}</option>))}
                   </select>
                 </div>
               </div>
             </div>
 
             {/* Notes */}
-            <div
-              className="rounded-xl p-6"
-              style={{
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.08)",
-              }}
-            >
-              <h2
-                className="font-display font-bold text-white mb-5"
-                style={{ fontSize: "1.1rem", letterSpacing: "0.08em" }}
-              >
-                SPECIAL NOTES
-              </h2>
-              <textarea
-                placeholder="Any special requirements, preferred pickup time, additional driver info, etc."
-                value={form.notes}
-                onChange={set("notes")}
-                rows={4}
-                className={`${inputClass} resize-none`}
-                style={{ lineHeight: "1.6" }}
-              />
+            <div className="rounded-xl p-6" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <h2 className="font-display font-bold mb-5" style={{ fontSize: "1.1rem", letterSpacing: "0.08em", color: "var(--text)" }}>{b.notes}</h2>
+              <textarea placeholder={b.notesPlaceholder} value={form.notes} onChange={set("notes")} rows={4} className={`${inputClass} resize-none`} style={{ lineHeight: "1.6" }} />
             </div>
 
-            <button
-              type="submit"
-              className="btn-accent w-full py-4 rounded-md font-display font-bold tracking-widest"
-              style={{
-                fontSize: "1rem",
-                letterSpacing: "0.15em",
-                boxShadow: "0 0 30px rgba(0,212,255,0.25)",
-              }}
-            >
-              SUBMIT BOOKING REQUEST
+            <button type="submit" className="btn-accent w-full py-4 rounded-md font-display font-bold tracking-widest" style={{ fontSize: "1rem", letterSpacing: "0.15em", boxShadow: "0 0 30px rgba(0,212,255,0.25)" }}>
+              {b.submitBtn}
             </button>
 
-            <p
-              className="text-xs text-center leading-relaxed"
-              style={{ color: "var(--text-dim)" }}
-            >
-              Your booking request will be reviewed by the ENGENZ team. We will contact
-              you shortly to confirm availability and final details.
-            </p>
+            <p className="text-xs text-center leading-relaxed" style={{ color: "var(--text-dim)" }}>{b.disclaimer}</p>
           </form>
 
           {/* Sidebar */}
@@ -473,21 +335,16 @@ export default function BookingForm() {
                 border: "1px solid rgba(255,255,255,0.08)",
               }}
             >
-              <h3
-                className="font-display font-bold text-white mb-5"
-                style={{ fontSize: "1rem", letterSpacing: "0.08em" }}
-              >
-                BOOKING SUMMARY
-              </h3>
+              <h3 className="font-display font-bold mb-5" style={{ fontSize: "1rem", letterSpacing: "0.08em", color: "var(--text)" }}>{b.summary}</h3>
 
               {selectedVehicle ? (
                 <div className="space-y-3 mb-5">
                   {[
-                    { label: "Vehicle", value: `${selectedVehicle.name} ${selectedVehicle.year}` },
-                    { label: "Daily Rate", value: `${selectedVehicle.pricePerDay.toLocaleString("en-EG")} EGP` },
-                    { label: "Rental Days", value: rentalDays > 0 ? `${rentalDays} days` : "— select dates" },
-                    { label: "Pickup", value: form.pickupLocation || "— not selected" },
-                    { label: "Drop-off", value: form.dropoffLocation || "— not selected" },
+                    { label: b.summaryVehicle, value: `${selectedVehicle.name} ${selectedVehicle.year}` },
+                    { label: b.summaryRate, value: `${selectedVehicle.pricePerDay.toLocaleString("en-EG")} EGP` },
+                    { label: b.summaryDays, value: rentalDays > 0 ? `${rentalDays} days` : b.summarySelectDates },
+                    { label: b.summaryPickup, value: form.pickupLocation || b.summaryNoLocation },
+                    { label: b.summaryDropoff, value: form.dropoffLocation || b.summaryNoLocation },
                   ].map(({ label, value }) => (
                     <div
                       key={label}
@@ -530,34 +387,19 @@ export default function BookingForm() {
                     className="text-xs font-bold tracking-widest mb-1"
                     style={{ color: "var(--text-muted)", letterSpacing: "0.1em" }}
                   >
-                    ESTIMATED TOTAL
+                    {b.estimatedTotal}
                   </div>
-                  <div
-                    className="font-display font-bold"
-                    style={{ fontSize: "1.8rem", color: "var(--accent)", letterSpacing: "-0.01em" }}
-                  >
+                  <div className="font-display font-bold" style={{ fontSize: "1.8rem", color: "var(--accent)", letterSpacing: "-0.01em" }}>
                     {estimatedTotal.toLocaleString("en-EG")}
-                    <span className="text-sm ml-1 font-bold" style={{ color: "var(--text-muted)" }}>
-                      EGP
-                    </span>
+                    <span className="text-sm ml-1 font-bold" style={{ color: "var(--text-muted)" }}>EGP</span>
                   </div>
-                  <div
-                    className="text-xs mt-1"
-                    style={{ color: "var(--text-dim)" }}
-                  >
-                    Final price confirmed by ENGENZ team
-                  </div>
+                  <div className="text-xs mt-1" style={{ color: "var(--text-dim)" }}>{b.priceConfirm}</div>
                 </div>
               )}
 
               {/* Checklist */}
               <div className="mt-5 space-y-2">
-                {[
-                  "Valid ID or Passport",
-                  "Valid Driving License",
-                  "Deposit may be required",
-                  "Insurance included",
-                ].map((item) => (
+                {b.checks.map((item) => (
                   <div key={item} className="flex items-center gap-2">
                     <CheckCircle size={13} style={{ color: "var(--accent)", flexShrink: 0 }} />
                     <span className="text-xs font-semibold" style={{ color: "var(--text-muted)" }}>
@@ -576,12 +418,7 @@ export default function BookingForm() {
                 border: "1px solid rgba(255,255,255,0.08)",
               }}
             >
-              <h3
-                className="font-display font-bold text-white mb-4"
-                style={{ fontSize: "1rem", letterSpacing: "0.08em" }}
-              >
-                CONTACT ENGENZ
-              </h3>
+              <h3 className="font-display font-bold mb-4" style={{ fontSize: "1rem", letterSpacing: "0.08em", color: "var(--text)" }}>{b.contactTitle}</h3>
               <div className="space-y-3">
                 {[
                   { icon: Phone, label: "+20 11 5233 3633", href: "tel:+201152333633" },
